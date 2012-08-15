@@ -54,7 +54,7 @@ Partial Class Form1
         Me.TextBox1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TextBox1.Size = New System.Drawing.Size(100, 20)
         Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "ajax123"
+        Me.TextBox1.Text = "password"
         '
         'WebBrowser1
         '
