@@ -320,6 +320,7 @@ Public Class Form1
             Next
 
             My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", Nothing, False)
+	    start()
         Else
             primary = True
         End If
