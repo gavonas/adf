@@ -130,7 +130,7 @@ Public Class Form1
                     ListBox1.Items.RemoveAt(0)
                     numberOfnames2 -= 1
                 Loop
-                If strTemp < 3 Then
+                If strTemp.length < 3 Then
                 Else
                     My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", strTemp, False)
                 End If
@@ -320,7 +320,6 @@ Public Class Form1
             Next
 
             My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", Nothing, False)
-            start()
         Else
             primary = True
         End If
@@ -357,11 +356,11 @@ Public Class Form1
     End Sub
 
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
-        ListBox2.Items.Clear()
+        saveFiles()
     End Sub
 
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-        ListBox1.Items.Clear()
+        saveFiles()
     End Sub
 
 
