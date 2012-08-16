@@ -154,13 +154,9 @@ Public Class Form1
                 ListBox2.Items.Add(item)
                 item = Nothing
             End If
-
         Next
         My.Computer.FileSystem.WriteAllText(path & "\emails.txt", "", False)
-
-
         numOfAccounts = ListBox1.Items.Count
-
         Do Until numOfAccounts = counter2 Or pause = True
             If ListBox2.Items.Count = 0 Then
                 filereader = My.Computer.FileSystem.ReadAllText(path & "\emails.txt")
@@ -175,14 +171,10 @@ Public Class Form1
                 If ListBox2.Text.Length < 3 Then
                     ListBox2.Items.RemoveAt(0)
                 Else
-
-
-
                     'creation counter gets how many names were created
                     ListBox1.SelectedIndex = CreationCounter
                     ListBox2.SelectedIndex = CreationCounter
                     strEmail = ListBox2.Text
-
                     'loads account settings page
                     loadstart()
                     Do Until whatever111 = True
@@ -338,10 +330,8 @@ Public Class Form1
         Do Until sw.ElapsedMilliseconds > seconds
             System.Windows.Forms.Application.DoEvents()
         Loop
-
         sw.Stop()
     End Sub
-
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         'opens form 2
         email.Enabled = True
@@ -349,22 +339,13 @@ Public Class Form1
         Me.Enabled = False
         Me.Enabled = True
     End Sub
-
-
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
         loadstart()
         'refreshes page
     End Sub
-
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
         saveFiles()
     End Sub
-
-    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-        saveFiles()
-    End Sub
-
-
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim temp As String

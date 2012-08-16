@@ -31,7 +31,7 @@ Partial Class Form2
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(40, 15)
+        Me.Button1.Location = New System.Drawing.Point(54, 32)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(118, 23)
         Me.Button1.TabIndex = 0
@@ -47,6 +47,7 @@ Partial Class Form2
         Me.WebBrowser1.TabIndex = 1
         Me.WebBrowser1.Url = New System.Uri("https://secure.runescape.com/m=weblogin/loginform.ws?mod=www&ssl=1&expired=0&dest" & _
                 "=account_settings.ws", System.UriKind.Absolute)
+        Me.WebBrowser1.Visible = False
         '
         'ListBox1
         '
@@ -55,10 +56,11 @@ Partial Class Form2
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(120, 95)
         Me.ListBox1.TabIndex = 2
+        Me.ListBox1.Visible = False
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(40, 44)
+        Me.Button2.Location = New System.Drawing.Point(54, 61)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(118, 23)
         Me.Button2.TabIndex = 3
@@ -67,7 +69,7 @@ Partial Class Form2
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(40, 73)
+        Me.Button3.Location = New System.Drawing.Point(54, 90)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(118, 23)
         Me.Button3.TabIndex = 4
@@ -78,14 +80,14 @@ Partial Class Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(179, 114)
+        Me.ClientSize = New System.Drawing.Size(239, 147)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form2"
-        Me.Text = "Form2"
+        Me.Text = "Name Checker"
         Me.ResumeLayout(False)
 
     End Sub

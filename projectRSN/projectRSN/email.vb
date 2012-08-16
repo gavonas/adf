@@ -3,9 +3,6 @@
     Dim primary As Boolean
     Dim numCounter As Integer
     Dim numOfaccounts As Integer
-    Dim waitcounter As Integer
-    Dim waitcounter1 As Integer
-    Dim waitcounter2 As Integer
     Dim numcounter1 As Integer
     Dim proxies() As String
     Dim email As String
@@ -65,34 +62,12 @@
         createAccounts()
     End Sub
     Private Sub createAccounts()
-
         Dim counter As Integer
-
         Dim didntwork As Boolean = False
-        Dim programs As Integer
         Dim rndnumber As Random
-        'If Form1.primary = True Then
         If numOfaccounts = 0 Then
             numOfaccounts = InputBox("How many emails to create?")
         End If
-        '    programs = InputBox("How many Programs to be ran (10 max)")
-        '    Do Until programs <= 10
-        '        MessageBox.Show("Invalid answer.  Maximum ran is 5)")
-        '        programs = InputBox("How many Programs to be ran (5 max)")
-        '    Loop
-        '    numOfaccounts /= programs
-        '    '    My.Computer.FileSystem.WriteAllText(Form1.path & "\settings.txt", "email " & numOfaccounts.ToString & " " & TextBox3.Text & " " & TextBox1.Text & " " & TextBox2.Text, False)
-        '    Do Until programs = 1
-        '        Shell(Form1.path & "\projectRSN.exe")
-        '        programs -= 1
-        '    Loop
-        'Else
-        '    rndnumber = New Random
-        '    counter = rndnumber.Next(1000)
-        '    MessageBox.Show("starting")
-        'End If
-
-
         password = TextBox3.Text
         Do Until WebBrowser1.IsBusy = False
             wait(10)
@@ -106,28 +81,16 @@
             Do Until WebBrowser1.IsBusy = False
                 wait(5)
             Loop
-
-
-
             Try
-                'trys to login once if fails try again if fail try a 3rd time
                 WebBrowser1.Document.GetElementById("submit").InvokeMember("click")
             Catch ex As Exception
                 didntwork = True
                 WebBrowser1.Stop()
                 WebBrowser1.Navigate(Form1.path & "\fakeRsImposters.html")
-                '  MessageBox.Show(ex.ToString)
                 wait(5)
                 Do Until WebBrowser1.IsBusy = False
-                    waitcounter1 += 1
-                    If waitcounter1 = 3 Then
-                        waitcounter1 = 0
-                        WebBrowser1.Stop()
-                        wait(5)
-                    End If
                     wait(5)
                 Loop
-                waitcounter1 = 0
             End Try
             wait(5)
             Do Until WebBrowser1.IsBusy = False
@@ -143,66 +106,17 @@
                 numcounter1 += 1
                 My.Computer.FileSystem.WriteAllText(Form1.path & "\emails.txt", email & ControlChars.NewLine, True)
                 If numcounter1 = 10 Then
-                    If ListBox1.Items.Count > 0 Then
-			If Listbox1.Items.Count > 40
-                        ListBox1.SelectedIndex = 0
-                        RefreshIESettings(ListBox1.Text)
-                        numcounter1 = 0
-			Listbox1.items.add(listbox1.text)
-                        ListBox1.Items.RemoveAt(0)
-				Else
-                        ListBox1.SelectedIndex = 0
-                        RefreshIESettings(ListBox1.Text)
-                        numcounter1 = 0
-                        ListBox1.Items.RemoveAt(0)
-			End if
-			Else
-                        blnStop = True
-                        MessageBox.Show("Out of Proxies")
-                    End If
+                    removeProxy()
+                    numcounter1 = 0
                 End If
                 Label4.Text = numCounter.ToString
-
             End If
             If WebBrowser1.Url.ToString = "https://secure.runescape.com/m=account-creation/error.ws?error=1" Then
-                If ListBox1.Items.Count > 0 Then
-                    If Listbox1.Items.Count > 40
-                        ListBox1.SelectedIndex = 0
-                        RefreshIESettings(ListBox1.Text)
-                        numcounter1 = 0
-			Listbox1.items.add(listbox1.text)
-                        ListBox1.Items.RemoveAt(0)
-		    Else
-                        ListBox1.SelectedIndex = 0
-                        RefreshIESettings(ListBox1.Text)
-                        numcounter1 = 0
-                        ListBox1.Items.RemoveAt(0)
-		    End if
-                Else
-                    blnStop = True
-                    MessageBox.Show("Out of Proxies")
-                End If
+                removeProxy()
             End If
             '      MessageBox.Show(WebBrowser1.Url.ToString)
             If WebBrowser1.DocumentText.Substring(0, 9) = "<!DOCTYPE" Then
-                If ListBox1.Items.Count > 0 Then
-                    If Listbox1.Items.Count > 40
-                        ListBox1.SelectedIndex = 0
-                        RefreshIESettings(ListBox1.Text)
-                        numcounter1 = 0
-			Listbox1.items.add(listbox1.text)
-                        ListBox1.Items.RemoveAt(0)
-	            Else
-                        ListBox1.SelectedIndex = 0
-                        RefreshIESettings(ListBox1.Text)
-                        numcounter1 = 0
-                        ListBox1.Items.RemoveAt(0)
-		    End if
-                Else
-                    blnStop = True
-                    MessageBox.Show("Out of Proxies")
-                End If
-
+                removeProxy()
             End If
             rndnumber = New Random
             counter += rndnumber.Next(1000)
@@ -210,31 +124,25 @@
           
         Loop
     End Sub
-
-
-
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Dim saveFile As String = String.Empty
-        Dim saveFileName As New SaveFileDialog
-        Dim saveFileName1 As String
-        Dim ok1 As DialogResult
-        'saves emails to text file
-
-        saveFileName.Filter = "(*.txt;)|*.txt;"
-
-
-        ok1 = saveFileName.ShowDialog()
-        If ok1 = Windows.Forms.DialogResult.OK Then
-
-
-
-            saveFileName1 = saveFileName.FileName.ToString
-
-            My.Computer.FileSystem.WriteAllText(saveFileName1, emaillist, False)
+    Private Sub removeProxy()
+        If ListBox1.Items.Count > 0 Then
+            If ListBox1.Items.Count > 40 Then
+                ListBox1.SelectedIndex = 0
+                RefreshIESettings(ListBox1.Text)
+                numcounter1 = 0
+                ListBox1.Items.Add(ListBox1.Text)
+                ListBox1.Items.RemoveAt(0)
+            Else
+                ListBox1.SelectedIndex = 0
+                RefreshIESettings(ListBox1.Text)
+                numcounter1 = 0
+                ListBox1.Items.RemoveAt(0)
+            End If
+        Else
+            blnStop = True
+            MessageBox.Show("Out of Proxies")
         End If
-
     End Sub
-
     Private Sub email_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Form1.Visible = True
         End
@@ -271,12 +179,6 @@
             ListBox1.Items.Add(item)
         Next
         wait(20)
-        If Form1.blnStart = True Then
-            TextBox1.Text = Form1.email1
-            TextBox2.Text = Form1.email2
-            TextBox3.Text = Form1.password
-            numOfaccounts = Form1.numOfAccounts
-        End If
     End Sub
 
 End Class

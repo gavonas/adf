@@ -32,7 +32,6 @@ Partial Class Form1
         Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -41,7 +40,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(198, 150)
+        Me.Button1.Location = New System.Drawing.Point(112, 65)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(126, 23)
         Me.Button1.TabIndex = 0
@@ -50,7 +49,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(330, 152)
+        Me.TextBox1.Location = New System.Drawing.Point(244, 67)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TextBox1.Size = New System.Drawing.Size(100, 20)
@@ -64,11 +63,12 @@ Partial Class Form1
         Me.WebBrowser1.Name = "WebBrowser1"
         Me.WebBrowser1.Size = New System.Drawing.Size(642, 334)
         Me.WebBrowser1.TabIndex = 2
+        Me.WebBrowser1.Visible = False
         '
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(101, 196)
+        Me.ListBox1.Location = New System.Drawing.Point(15, 111)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(120, 95)
         Me.ListBox1.TabIndex = 3
@@ -76,7 +76,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(128, 180)
+        Me.Label1.Location = New System.Drawing.Point(42, 95)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(63, 13)
         Me.Label1.TabIndex = 4
@@ -84,17 +84,17 @@ Partial Class Form1
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(198, 121)
+        Me.Button5.Location = New System.Drawing.Point(112, 36)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(126, 23)
         Me.Button5.TabIndex = 8
-        Me.Button5.Text = "create emails"
+        Me.Button5.Text = "Create Emails"
         Me.Button5.UseVisualStyleBackColor = True
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(349, 180)
+        Me.Label2.Location = New System.Drawing.Point(263, 95)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 9
@@ -103,7 +103,7 @@ Partial Class Form1
         'ListBox2
         '
         Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.Location = New System.Drawing.Point(311, 196)
+        Me.ListBox2.Location = New System.Drawing.Point(225, 111)
         Me.ListBox2.Name = "ListBox2"
         Me.ListBox2.Size = New System.Drawing.Size(120, 95)
         Me.ListBox2.TabIndex = 10
@@ -111,7 +111,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(330, 136)
+        Me.Label3.Location = New System.Drawing.Point(244, 51)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(56, 13)
         Me.Label3.TabIndex = 14
@@ -119,25 +119,16 @@ Partial Class Form1
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(230, 225)
+        Me.Button6.Location = New System.Drawing.Point(144, 140)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 23)
         Me.Button6.TabIndex = 15
-        Me.Button6.Text = "refresh"
+        Me.Button6.Text = "Refresh"
         Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(84, 297)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(156, 23)
-        Me.Button9.TabIndex = 16
-        Me.Button9.Text = "Clear Lists"
-        Me.Button9.UseVisualStyleBackColor = True
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(298, 297)
+        Me.Button10.Location = New System.Drawing.Point(112, 212)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(156, 23)
         Me.Button10.TabIndex = 17
@@ -146,7 +137,7 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(230, 254)
+        Me.Button2.Location = New System.Drawing.Point(144, 169)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 18
@@ -155,7 +146,7 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(227, 196)
+        Me.Button3.Location = New System.Drawing.Point(141, 111)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 19
@@ -164,7 +155,7 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(198, 92)
+        Me.Button4.Location = New System.Drawing.Point(112, 7)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(126, 23)
         Me.Button4.TabIndex = 20
@@ -180,7 +171,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button10)
-        Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.ListBox2)
@@ -192,7 +182,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form1"
-        Me.Text = "Smokin Runescape Account Creator"
+        Me.Text = "Gavonas's Imposter Creator"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -207,7 +197,6 @@ Partial Class Form1
     Friend WithEvents ListBox2 As System.Windows.Forms.ListBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
