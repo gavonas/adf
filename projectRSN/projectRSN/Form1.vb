@@ -15,9 +15,6 @@ Public Class Form1
     Dim amountPerProgram As Integer
     Dim numberofPrograms As Integer
     Dim primary As Boolean
-    Public blnStart As Boolean
-    Public email1 As String = "Email"
-    Public email2 As String = "Whatever.Something"
     Public password As String = "Password"
     Public numOfAccounts As Integer
     Private Sub loadstart()
