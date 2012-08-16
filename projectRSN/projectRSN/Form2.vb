@@ -23,7 +23,7 @@ Public Class Form2
         password = InputBox("First Password")
 
 
-        WebBrowser1.Navigate("https://secure.runescape.com/m=weblogin/loginform.ws?mod=www&ssl=1&reauth=1&dest=account_settings.ws")
+        WebBrowser1.Navigate(Form1.path & "\runescape.html")
         wait(5)
         If WebBrowser1.IsBusy = True Then
 
@@ -35,16 +35,13 @@ Public Class Form2
         End If
         Try
             WebBrowser1.Document.GetElementById("username").SetAttribute("value", email)
-            WebBrowser1.Document.GetElementById("password").SetAttribute("value", password)
-            WebBrowser1.Focus()
-            WebBrowser1.Document.GetElementById("password").Focus()
+            WebBrowser1.Document.GetElementById("password").SetAttribute("value", password & ControlChars.NewLine)
+            WebBrowser1.Document.GetElementById("submit1").InvokeMember("click")
         Catch
 
 
         End Try
 
-
-        SendKeys.SendWait(Chr(Keys.Enter))
         ' MessageBox.Show("Checking Now, you have:" & numoflistboxitems.ToString & " names.  This will take aproximately " & (numoflistboxitems * 2).ToString & "seconds to complete")
         wait(20)
         Do Until WebBrowser1.IsBusy = False
@@ -97,7 +94,7 @@ Public Class Form2
 
 
         Loop
-
+        MessageBox.Show("finished")
     End Sub
 
     Private Sub namechecker(ByRef url As String)
