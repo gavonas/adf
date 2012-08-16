@@ -4,19 +4,13 @@ Imports System.Windows.Forms
 Public Class Form1
     Dim codev As String
     Dim username As String
-    Dim CreationCounter As Integer
-    Dim clickcounter As Integer
-    Dim ii As Integer
     Dim strEmails() As String
     Dim strUsernames() As String
     Dim completedName As String
     Dim pause As Boolean = False
     Public path As String = Application.StartupPath
-    Dim amountPerProgram As Integer
-    Dim numberofPrograms As Integer
     Dim primary As Boolean
     Public password As String = "Password"
-    Public numOfAccounts As Integer
     Private Sub loadstart()
         'loads runescape account settings login page
         WebBrowser1.Navigate(path & "\runescape.html")
@@ -78,7 +72,6 @@ Public Class Form1
         Dim numberOfnames2 As Integer
         Dim numberOfemails As Integer
         pause = False
-        Dim counter2 As Integer
         password = TextBox1.Text
         '  MessageBox.Show(primary.ToString) 
         If primary = True Then
@@ -153,8 +146,7 @@ Public Class Form1
             End If
         Next
         My.Computer.FileSystem.WriteAllText(path & "\emails.txt", "", False)
-        numOfAccounts = ListBox1.Items.Count
-        Do Until numOfAccounts = counter2 Or pause = True
+        Do Until ListBox1.Items.Count = 0 Or pause = True
             If ListBox2.Items.Count = 0 Then
                 filereader = My.Computer.FileSystem.ReadAllText(path & "\emails.txt")
                 items = Split(filereader, ControlChars.NewLine)
@@ -168,9 +160,8 @@ Public Class Form1
                 If ListBox2.Text.Length < 3 Then
                     ListBox2.Items.RemoveAt(0)
                 Else
-                    'creation counter gets how many names were created
-                    ListBox1.SelectedIndex = CreationCounter
-                    ListBox2.SelectedIndex = CreationCounter
+                    ListBox1.SelectedIndex = 0
+                    ListBox2.SelectedIndex = 0
                     strEmail = ListBox2.Text
                     'loads account settings page
                     loadstart()
@@ -234,9 +225,7 @@ Public Class Form1
                         ListBox2.Items.RemoveAt(0)
                     End If
                 End If
-                counter2 += 1
             End If
-
         Loop
     End Sub
 
