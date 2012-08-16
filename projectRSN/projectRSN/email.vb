@@ -144,11 +144,19 @@
                 My.Computer.FileSystem.WriteAllText(Form1.path & "\emails.txt", email & ControlChars.NewLine, True)
                 If numcounter1 = 10 Then
                     If ListBox1.Items.Count > 0 Then
+			If Listbox1.Items.Count > 40
+                        ListBox1.SelectedIndex = 0
+                        RefreshIESettings(ListBox1.Text)
+                        numcounter1 = 0
+			Listbox1.items.add(listbox1.text)
+                        ListBox1.Items.RemoveAt(0)
+				Else
                         ListBox1.SelectedIndex = 0
                         RefreshIESettings(ListBox1.Text)
                         numcounter1 = 0
                         ListBox1.Items.RemoveAt(0)
-                    Else
+			End if
+			Else
                         blnStop = True
                         MessageBox.Show("Out of Proxies")
                     End If
@@ -158,10 +166,18 @@
             End If
             If WebBrowser1.Url.ToString = "https://secure.runescape.com/m=account-creation/error.ws?error=1" Then
                 If ListBox1.Items.Count > 0 Then
-                    ListBox1.SelectedIndex = 0
-                    RefreshIESettings(ListBox1.Text)
-                    numcounter1 = 0
-                    ListBox1.Items.RemoveAt(0)
+                    If Listbox1.Items.Count > 40
+                        ListBox1.SelectedIndex = 0
+                        RefreshIESettings(ListBox1.Text)
+                        numcounter1 = 0
+			Listbox1.items.add(listbox1.text)
+                        ListBox1.Items.RemoveAt(0)
+		    Else
+                        ListBox1.SelectedIndex = 0
+                        RefreshIESettings(ListBox1.Text)
+                        numcounter1 = 0
+                        ListBox1.Items.RemoveAt(0)
+		    End if
                 Else
                     blnStop = True
                     MessageBox.Show("Out of Proxies")
@@ -170,10 +186,18 @@
             '      MessageBox.Show(WebBrowser1.Url.ToString)
             If WebBrowser1.DocumentText.Substring(0, 9) = "<!DOCTYPE" Then
                 If ListBox1.Items.Count > 0 Then
-                    ListBox1.SelectedIndex = 0
-                    RefreshIESettings(ListBox1.Text)
-                    numcounter1 = 0
-                    ListBox1.Items.RemoveAt(0)
+                    If Listbox1.Items.Count > 40
+                        ListBox1.SelectedIndex = 0
+                        RefreshIESettings(ListBox1.Text)
+                        numcounter1 = 0
+			Listbox1.items.add(listbox1.text)
+                        ListBox1.Items.RemoveAt(0)
+	            Else
+                        ListBox1.SelectedIndex = 0
+                        RefreshIESettings(ListBox1.Text)
+                        numcounter1 = 0
+                        ListBox1.Items.RemoveAt(0)
+		    End if
                 Else
                     blnStop = True
                     MessageBox.Show("Out of Proxies")
