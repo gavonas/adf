@@ -429,4 +429,9 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        Form2.Enabled = True
+        Form2.Visible = True
+    End Sub
 End Class
