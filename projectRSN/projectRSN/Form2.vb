@@ -23,7 +23,7 @@ Public Class Form2
         password = InputBox("First Password")
 
 
-        WebBrowser1.Navigate(Form1.path & "\runescape.html")
+        WebBrowser1.Navigate(Form3.path & "\runescape.html")
         wait(5)
         If WebBrowser1.IsBusy = True Then
 
@@ -201,7 +201,7 @@ Public Class Form2
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         WebBrowser1.ScriptErrorsSuppressed = True
-        Form1.Visible = False
-        Form1.Enabled = False
+        Form3.Visible = False
+        Form3.Enabled = False
     End Sub
 End Class
