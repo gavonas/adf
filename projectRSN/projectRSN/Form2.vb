@@ -203,5 +203,22 @@ Public Class Form2
         WebBrowser1.ScriptErrorsSuppressed = True
         Form3.Visible = False
         Form3.Enabled = False
+        Dim strHtml As String
+        strHtml = "<html>" & ControlChars.NewLine &
+"<head>" & ControlChars.NewLine &
+"</head>" & ControlChars.NewLine &
+"</body>" & ControlChars.NewLine &
+"<form action=""https://secure.runescape.com/m=weblogin/login.ws"" method=""post"" autocomplete=""off"">" & ControlChars.NewLine &
+"<input type=""text"" title=""Login"" name=""username"" maxlength=""200"" size=""26"" value="""" id=""username"" class=""NoPlaceholder"" >" & ControlChars.NewLine &
+"<input type=""password"" title=""Password"" name=""password"" maxlength=""20"" size=""26"" value="""" id=""password"" class=""NoPlaceholder"" >" & ControlChars.NewLine &
+"<input type=""submit"" id=""haha"" name=""haha"" title=""Login""/>" & ControlChars.NewLine &
+"<input type=""submit"" id=""submit1"" name=""submit1"" value=""Join Free Now"">" & ControlChars.NewLine &
+"<input type=""hidden"" value=""www"" name=""mod"">" & ControlChars.NewLine &
+"<input type=""hidden"" value=""1"" name=""ssl"">" & ControlChars.NewLine &
+"<input type=""hidden"" value=""account_settings.ws"" name=""dest"">" & ControlChars.NewLine &
+"</form>" & ControlChars.NewLine &
+"</body>" & ControlChars.NewLine &
+"</html>"
+        My.Computer.FileSystem.WriteAllText(Form3.path & "\runescape.html", strHtml, False)
     End Sub
 End Class

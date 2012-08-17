@@ -113,6 +113,8 @@ Partial Class Form3
         Me.WebBrowser1.Name = "WebBrowser1"
         Me.WebBrowser1.Size = New System.Drawing.Size(762, 533)
         Me.WebBrowser1.TabIndex = 8
+        Me.WebBrowser1.Url = New System.Uri("https://secure.runescape.com/m=billing_amazonddd/create?token=1687ea00-6153-4dd7-" & _
+                "841d-adsfeapfou3223", System.UriKind.Absolute)
         '
         'ListBox2
         '
