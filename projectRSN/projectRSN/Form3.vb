@@ -222,8 +222,26 @@
             My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", Nothing, False)
         End If
     End Sub
+    Private Sub versionCheck()
+        Dim filereader As String
+        Dim version As String
+        filereader = My.Computer.FileSystem.ReadAllText(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN\OK.txt")
+        WebBrowser1.Navigate("http://gavonas.comlu.com/version.html")
+        wait(10)
+        Do Until WebBrowser1.IsBusy = False
+            wait(10)
+        Loop
+        version = WebBrowser1.DocumentText.ToString
+        version = version.Substring(0, 3)
+        If version <> filereader Then
+            MessageBox.Show("Out dated Version.  Please download the newest version!")
+            End
+        End If
+
+    End Sub
+
     Private Sub Validate1()
-        If My.Computer.FileSystem.FileExists("C:\Program Files\projectRSN\Ok.txt") = True Then
+        If My.Computer.FileSystem.FileExists(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN\Ok.txt") = True Then
         Else
             Dim authcode As String
             Dim verification As String
@@ -240,8 +258,8 @@
             verification = verification.Trim
             If authcode = verification Then
                 Try
-                    My.Computer.FileSystem.CreateDirectory("C:\Program Files\projectRSN")
-                    My.Computer.FileSystem.WriteAllText("C:\Program Files\projectRSN\Ok.txt", Nothing, False)
+                    My.Computer.FileSystem.CreateDirectory(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN")
+                    My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN\Ok.txt", "1.0", False)
                 Catch ex As Exception
                     MessageBox.Show("Please run as Administrator")
                     End
@@ -252,6 +270,7 @@
                 End
             End If
         End If
+        versionCheck()
     End Sub
     Private Sub loadFiles()
 
@@ -272,8 +291,8 @@
 
         temp = Split(filereader, ControlChars.NewLine)
         For Each item As String In temp
-            If temp.Length > 3 Then
-                ListBox1.Items.Add(item)
+            If item.Length > 3 Then
+                ListBox1.Items.Add(item.Trim)
                 item = Nothing
             End If
         Next
@@ -282,8 +301,8 @@
 
         temp = Split(filereader, ControlChars.NewLine)
         For Each item As String In temp
-            If temp.Length > 3 Then
-                ListBox2.Items.Add(item)
+            If item.Length > 3 Then
+                ListBox2.Items.Add(item.Trim)
                 item = Nothing
             End If
         Next
