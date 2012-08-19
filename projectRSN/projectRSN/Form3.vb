@@ -4,6 +4,8 @@
     Dim emailNum As Integer
     Public path As String = Application.StartupPath
     Dim primary As Boolean = True
+    Dim appData As String
+
     Public Structure Struct_INTERNET_PROXY_INFO
         Public dwAccessType As Integer
         Public proxy As IntPtr
@@ -55,7 +57,7 @@
             x = Math.Floor(ListBox1.Items.Count / numberOfprograms)
             y = Math.Floor(ListBox2.Items.Count / numberOfprograms)
             Do Until numberOfprograms = 1
-                My.Computer.FileSystem.WriteAllText(path & "\settings.txt", TextBox1.Text & " " & TextBox2.Text & " " & TextBox3.Text, False)
+                My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "settings.txt"), TextBox1.Text & " " & TextBox2.Text & " " & TextBox3.Text, False)
                 Shell(path & "\projectRSN.exe")
                 numberOfprograms -= 1
                 Dim strList As String
@@ -65,7 +67,7 @@
                     ListBox1.Items.RemoveAt(0)
                     z += 1
                 Loop
-                My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", strList, False)
+                My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "usernames.txt"), strList, False)
                 z = 0
                 strList = Nothing
                 Do Until z = y
@@ -74,10 +76,10 @@
                     ListBox2.Items.RemoveAt(0)
                     z += 1
                 Loop
-                My.Computer.FileSystem.WriteAllText(path & "\proxies.txt", strList, False)
+                My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "proxies.txt"), strList, False)
                 z = 0
                 strList = Nothing
-                Do Until My.Computer.FileSystem.FileExists(path & "\settings.txt") = False
+                Do Until My.Computer.FileSystem.FileExists(System.IO.Path.Combine(path, "settings.txt")) = False
                     wait(10)
                 Loop
             Loop
@@ -85,12 +87,12 @@
             Dim temp As String
             Dim temp2() As String
             wait(20)
-            temp = My.Computer.FileSystem.ReadAllText(path & "\settings.txt")
+            temp = My.Computer.FileSystem.ReadAllText(System.IO.Path.Combine(path, "settings.txt"))
             temp2 = Split(temp, " ")
             TextBox1.Text = temp2(0)
             TextBox2.Text = temp2(1)
             TextBox3.Text = temp2(2)
-            My.Computer.FileSystem.DeleteFile(path & "\settings.txt")
+            My.Computer.FileSystem.DeleteFile(System.IO.Path.Combine(path, "settings.txt"))
         End If
         numberOfAccounts = ListBox1.Items.Count
 
@@ -149,6 +151,7 @@
                     url = url.Substring(49, 11)
                 End If
                 If url <> "linkSuccess" Then
+
                     If ListBox2.Items.Count > 40 Then
                         ListBox2.SelectedIndex = 0
                         RefreshIESettings(ListBox2.Text)
@@ -163,6 +166,8 @@
                     End If
 
                 Else
+                    accountsCreated = email & "::" & username
+                    My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "Imposters_Completed.txt"), accountsCreated & ControlChars.NewLine, True)
                     numberOfAccounts -= 1
                     counter += 1
                     If counter = 11 Then
@@ -178,8 +183,6 @@
                         End If
                         counter = 0
                     End If
-                    accountsCreated = email & "::" & username
-                    My.Computer.FileSystem.WriteAllText(path & "\Imposters_Completed.txt", accountsCreated & ControlChars.NewLine, True)
                     ListBox1.Items.RemoveAt(0)
                 End If
             Else
@@ -194,13 +197,18 @@
     End Sub
 
     Private Sub Form3_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        fileCheck()
-        Validate1()
-        loadFiles()
-        If My.Computer.FileSystem.FileExists(path & "\settings.txt") Then
+        If My.Computer.FileSystem.FileExists(System.IO.Path.Combine(path, "settings.txt")) Then
             primary = False
+            loadFiles()
             start()
         End If
+        If primary = True Then
+            loadFiles()
+            fileCheck()
+            Validate1()
+
+        End If
+
     End Sub
     Private Sub wait(ByRef seconds As Integer)
 
@@ -215,17 +223,17 @@
         sw.Stop()
     End Sub
     Private Sub fileCheck()
-        If My.Computer.FileSystem.FileExists(path & "\proxies.txt") = False Then
-            My.Computer.FileSystem.WriteAllText(path & "\proxies.txt", Nothing, False)
+        If My.Computer.FileSystem.FileExists(System.IO.Path.Combine(path, "proxies.txt")) = False Then
+            My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "proxies.txt"), Nothing, False)
         End If
-        If My.Computer.FileSystem.FileExists(path & "\usernames.txt") = False Then
-            My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", Nothing, False)
+        If My.Computer.FileSystem.FileExists(System.IO.Path.Combine(path, "usernames.txt")) = False Then
+            My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "usernames.txt"), Nothing, False)
         End If
     End Sub
     Private Sub versionCheck()
         Dim filereader As String
         Dim version As String
-        filereader = My.Computer.FileSystem.ReadAllText(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN\OK.txt")
+        filereader = My.Computer.FileSystem.ReadAllText(System.IO.Path.Combine(appData, "OK.txt"))
         WebBrowser1.Navigate("http://gavonas.comlu.com/version.html")
         wait(10)
         Do Until WebBrowser1.IsBusy = False
@@ -241,7 +249,8 @@
     End Sub
 
     Private Sub Validate1()
-        If My.Computer.FileSystem.FileExists(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN\Ok.txt") = True Then
+        appData = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData.ToString, "projectRSN")
+        If My.Computer.FileSystem.FileExists(System.IO.Path.Combine(appData, "Ok.txt")) = True Then
         Else
             Dim authcode As String
             Dim verification As String
@@ -258,8 +267,8 @@
             verification = verification.Trim
             If authcode = verification Then
                 Try
-                    My.Computer.FileSystem.CreateDirectory(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN")
-                    My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.SpecialDirectories.MyDocuments.ToString & "\..\AppData\Roaming\projectRSN\Ok.txt", "1.0", False)
+                    My.Computer.FileSystem.CreateDirectory(appData)
+                    My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(appData, "Ok.txt"), "1.0", False)
                 Catch ex As Exception
                     MessageBox.Show("Please run as Administrator")
                     End
@@ -274,7 +283,7 @@
     End Sub
     Private Sub loadFiles()
 
-
+        Dim ioFilereader As IO.StreamReader
         Dim filereader As String
         Dim temp() As String
         Dim rndString As String
@@ -285,21 +294,16 @@
         Do Until WebBrowser1.IsBusy = False
             wait(10)
         Loop
-
-        filereader = My.Computer.FileSystem.ReadAllText(path & "\usernames.txt")
-        My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", Nothing, False)
-
+        ioFilereader = IO.File.OpenText(System.IO.Path.Combine(path, "usernames.txt"))
+        Do Until ioFilereader.Peek = -1
+            ListBox1.Items.Add(ioFilereader.ReadLine)
+        Loop
+        ioFilereader.Close()
+        My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "usernames.txt"), Nothing, False)
+        filereader = My.Computer.FileSystem.ReadAllText(System.IO.Path.Combine(path, "proxies.txt"))
+        My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "proxies.txt"), Nothing, False)
         temp = Split(filereader, ControlChars.NewLine)
-        For Each item As String In temp
-            If item.Length > 3 Then
-                ListBox1.Items.Add(item.Trim)
-                item = Nothing
-            End If
-        Next
-        filereader = My.Computer.FileSystem.ReadAllText(path & "\proxies.txt")
-        My.Computer.FileSystem.WriteAllText(path & "\proxies.txt", Nothing, False)
 
-        temp = Split(filereader, ControlChars.NewLine)
         For Each item As String In temp
             If item.Length > 3 Then
                 ListBox2.Items.Add(item.Trim)
@@ -317,14 +321,14 @@
             results &= ListBox1.Text & ControlChars.NewLine
             ListBox1.Items.RemoveAt(0)
         Loop
-        My.Computer.FileSystem.WriteAllText(path & "\usernames.txt", results, True)
+        My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "usernames.txt"), results, True)
         results = Nothing
         Do Until ListBox2.Items.Count = 0
             ListBox2.SelectedIndex = 0
             results &= ListBox2.Text & ControlChars.NewLine
             ListBox2.Items.RemoveAt(0)
         Loop
-        My.Computer.FileSystem.WriteAllText(path & "\proxies.txt", results, True)
+        My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(path, "proxies.txt"), results, True)
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
