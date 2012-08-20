@@ -99,8 +99,6 @@
         Do Until numberOfAccounts = 0
             ListBox1.SelectedIndex = 0
             If ListBox1.Text.Length > 3 Then
-
-
                 rndNum2 = New Random
                 rndString = rndNum2.Next(100000, 999999).ToString & rndNum2.Next(100000, 999999).ToString
                 rndNum2 = New Random
@@ -203,10 +201,10 @@
             start()
         End If
         If primary = True Then
-            loadFiles()
+
             fileCheck()
             Validate1()
-
+            loadFiles()
         End If
 
     End Sub
@@ -241,11 +239,17 @@
         Loop
         version = WebBrowser1.DocumentText.ToString
         version = version.Substring(0, 3)
-        If version <> filereader Then
+        If version <> filereader.Substring(0, 3) Then
             MessageBox.Show("Out dated Version.  Please download the newest version!")
             End
         End If
+        If filereader.Length > 3 Then
+            If filereader.Substring(3, 7).ToLower = "manager" Then
+                Form2.Visible = True
+                Form2.Enabled = True
+            End If
 
+        End If
     End Sub
 
     Private Sub Validate1()
@@ -265,19 +269,31 @@
             verification = verification.Substring(14, 10)
             temp = Split(verification, ControlChars.NewLine)
             verification = verification.Trim
-            If authcode = verification Then
+            If authcode.ToLower = "manager" Then
                 Try
                     My.Computer.FileSystem.CreateDirectory(appData)
-                    My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(appData, "Ok.txt"), "1.0", False)
+                    My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(appData, "Ok.txt"), "1.0Manager", False)
                 Catch ex As Exception
                     MessageBox.Show("Please run as Administrator")
                     End
                 End Try
 
             Else
-                MessageBox.Show("Invalid Auth Code Program will now End")
-                End
+                If authcode = verification Then
+                    Try
+                        My.Computer.FileSystem.CreateDirectory(appData)
+                        My.Computer.FileSystem.WriteAllText(System.IO.Path.Combine(appData, "Ok.txt"), "1.0", False)
+                    Catch ex As Exception
+                        MessageBox.Show("Please run as Administrator")
+                        End
+                    End Try
+
+                Else
+                    MessageBox.Show("Invalid Auth Code Program will now End")
+                    End
+                End If
             End If
+
         End If
         versionCheck()
     End Sub
